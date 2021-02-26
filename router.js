@@ -14,7 +14,7 @@ const regexReducer = (pathStack) => {
     return new RegExp(pathStack.join('').replace(/\/+/, '/'));
 }
 
-export default class Router {
+module.exports = class Router {
     constructor(routes) {
         this.routes = routes;
         this.renderStack = [];
@@ -62,7 +62,7 @@ export default class Router {
             } :
             {
                 path: this.nextRenderStack[i].path,
-                component: new this.nextRenderStack[i].component(i > 0 ? this.renderStack[i - 1] : null),
+                component: new this.nextRenderStack[i].component(null, i > 0 ? this.renderStack[i - 1] : null),
             }
             ++i;
         }
